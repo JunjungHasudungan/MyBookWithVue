@@ -24,6 +24,11 @@ const router = createRouter({
       name: 'PostEdit',
       component: () => import('../views/posts/PostEdit.vue')
     },
+    {
+      path: '/books',
+      name: 'BookIndex',
+      component: () => import('../views/books/BookIndex.vue')
+    },
   ]
 })
 
