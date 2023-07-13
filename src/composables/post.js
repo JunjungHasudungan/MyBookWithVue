@@ -16,7 +16,6 @@ export default function usePost() {
         try{
             const response = await axios.get(postData);
     
-            // console.log('ada data posts..');
             posts.value = response.data.data;
 
            
