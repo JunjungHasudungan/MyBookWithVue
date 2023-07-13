@@ -1,13 +1,3 @@
-    <script setup>
-        import { onMounted, ref } from 'vue';
-        
-        import usePost from '../../composables/post';
-     
-        const {  posts, getPosts } = usePost();
-        onMounted(() => getPosts())
-
-    </script>
-
 <template>
 
     <div class="mt-12">
@@ -90,3 +80,13 @@
     </div>
 
 </template>
+
+    <script setup>
+    import { onMounted, ref } from 'vue';
+
+    import usePost from '../../composables/post';
+
+    const {  posts, getPosts } = usePost();
+    onMounted(() => getPosts())
+
+    </script>

@@ -1,15 +1,45 @@
 <template>
     <div class="border border-gray-200 bg-gray-900 mt-4 px-2 rounded-lg">
         
-    <form class="mx-auto p-4  mx-w-md">
+    <form   @submit.prevent="storePost(form)"
+            class="mx-auto p-4  mx-w-md">
         <div class="mt-2 grid gap-6 mb-6 md:grid-cols-2">
             <div>
-                <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First name</label>
-                <input type="text" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="John" required>
+                <label 
+                    for="title" 
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Judul
+                </label>
+                <input 
+                    type="text" 
+                    id="title" 
+                    v-model="form.title"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                    placeholder="Masukkan Judul disini.." 
+                    required>
+                <div v-if="errors.title">
+                    <span class="text-sm text-red-400">
+                        {{ errors.title[0] }}
+                    </span>
+                </div>
             </div>
             <div>
-                <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last name</label>
-                <input type="text" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Doe" required>
+                <label 
+                    for="last_name" 
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Deskripsi
+                </label>
+                <input 
+                    type="text" 
+                    id="description" 
+                    v-model="form.description"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                    placeholder="Masukkan Keterangan disini.." required>
+                <div v-if="errors.description">
+                    <span class="text-sm text-red-400">
+                        {{ errors.description[0] }}
+                    </span>
+                </div>
             </div>
         </div>
         <div class="px-2 py-2 flex space-x-2">
@@ -20,3 +50,14 @@
 
     </div>
 </template>
+
+<script setup>
+    import { reactive } from 'vue';
+    import usePost from '../../composables/post';
+    const { errors, storePost } = usePost();
+
+    const form = reactive({
+        title: "",
+        description: ""
+    });
+</script>

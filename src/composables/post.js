@@ -36,7 +36,7 @@ export default function usePost() {
     const storePost = async (data) => {
 
         try{
-            await axios.post("posts", data);
+            await axios.post(postData, data);
 
            await router.push({name: "PostIndex"});
 
@@ -72,6 +72,7 @@ export default function usePost() {
         errors,
         getPosts,
         getPost,
+        storePost,
     }
 
 }
