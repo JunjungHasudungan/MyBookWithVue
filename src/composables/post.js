@@ -10,7 +10,7 @@ export default function usePost() {
     const errors = ref({}); 
     const router = useRouter();
 
-    const postData = axios.defaults.baseURL = "http://localhost:8000/api/posts"
+    const postData = axios.defaults.baseURL = "http://localhost:8000/api/posts/"
 
     const getPosts = async () => {
         try{
@@ -49,7 +49,7 @@ export default function usePost() {
 
     const updatePost = async (id) => {
         try{
-            await axios.put("posts/" + id, post.value); 
+            await axios.put(postData + id, post.value); 
             await router.push({name: "PostIndex"});
         }catch(error){
             if(error.response.data === 422){

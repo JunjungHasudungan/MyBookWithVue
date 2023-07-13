@@ -44,11 +44,11 @@
 
                 <tbody>
                     
-                        <tr v-for="(post, index) in posts" :key="index" class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                        <tr v-for="post in posts" :key="post.id" class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
 
                             <td class="px-6 py-4">
 
-                                {{ index + 1 }}
+                                {{index++ }}
 
                             </td>
 
@@ -66,7 +66,13 @@
 
                             <td class="px-6 py-4">
 
-                                <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                                    <RouterLink 
+                                        :to="{ name: 'PostEdit', params:{id: post.id} }" 
+                                        class="rounded-lg font-medium border-lg border-gray-900 text-whitehover:underline"
+                                        > Edit
+                                    </RouterLink>
+
+                                <!-- <a href="#" class="font-medium border-lg border-gray-900 text-whitehover:underline">Edit</a> -->
 
                             </td>
 
@@ -87,6 +93,9 @@
     import usePost from '../../composables/post';
 
     const {  posts, getPosts } = usePost();
+    
+    const index = 1;
+
     onMounted(() => getPosts())
 
     </script>
