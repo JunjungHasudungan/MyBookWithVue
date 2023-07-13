@@ -10,11 +10,11 @@ export default function usePost() {
     const errors = ref({}); 
     const router = useRouter();
 
-    const postData = axios.defaults.baseURL = "http://localhost:8000/api/posts/"
+    axios.defaults.baseURL = "http://localhost:8000/api/";
 
     const getPosts = async () => {
         try{
-            const response = await axios.get(postData);
+            const response = await axios.get("posts/");
     
             posts.value = response.data.data;
 
@@ -29,14 +29,14 @@ export default function usePost() {
     };
 
     const getPost = async (id) => {
-        const post = await axios.get("skill" + id);
+        const post = await axios.get("posts/" + id);
         post.value = response.data.data;
     }
 
     const storePost = async (data) => {
 
         try{
-            await axios.post(postData, data);
+            await axios.post("posts", data);
 
            await router.push({name: "PostIndex"});
 
@@ -49,7 +49,7 @@ export default function usePost() {
 
     const updatePost = async (id) => {
         try{
-            await axios.put(postData + id, post.value); 
+            await axios.put("posts" + id, post.value); 
             await router.push({name: "PostIndex"});
         }catch(error){
             if(error.response.data === 422){
@@ -59,10 +59,12 @@ export default function usePost() {
     }
 
     const destroyPost = async (id) => {
-        if(!window.confirm("Yakin menghapus data post? ")){
+
+        if(!window.confirm('Yakin menghapus data post?')){
             return;
         }
-        await axios.delete("posts/" + id);
+        axios.delete("posts/" + id);
+        await getPosts();
     }
 
     return {
@@ -73,6 +75,7 @@ export default function usePost() {
         getPosts,
         getPost,
         storePost,
+        destroyPost,
     }
 
 }

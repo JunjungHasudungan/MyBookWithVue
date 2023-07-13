@@ -1,3 +1,20 @@
+<script setup>
+
+    import { onMounted, ref } from 'vue';
+
+    import usePost from '../../composables/post';
+
+    const {  posts, getPosts, destroyPost } = usePost();
+
+    const index = 1;
+
+    onMounted(() =>
+        getPosts(),
+    )
+    
+
+</script>
+
 <template>
 
     <div class="mt-12">
@@ -9,7 +26,11 @@
         </div>
 
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-
+            <div v-if="posts === 0" class="px-2 py-2 w-full bg-yellow-500 text-white font-extrabold">
+                <span>
+                    Tidak ada data..
+                </span>
+            </div>
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
 
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -43,12 +64,12 @@
                 </thead>
 
                 <tbody>
-                    
+
                         <tr v-for="post in posts" :key="post.id" class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
 
                             <td class="px-6 py-4">
 
-                                {{index++ }}
+                                {{ index++ }}
 
                             </td>
 
@@ -66,13 +87,16 @@
 
                             <td class="px-6 py-4">
 
-                                    <RouterLink 
+                                    <!-- <RouterLink 
                                         :to="{ name: 'PostEdit', params:{id: post.id} }" 
                                         class="rounded-lg font-medium border-lg border-gray-900 text-whitehover:underline"
                                         > Edit
-                                    </RouterLink>
+                                    </RouterLink> -->
 
-                                <!-- <a href="#" class="font-medium border-lg border-gray-900 text-whitehover:underline">Edit</a> -->
+                                <button @click.prevent="destroyPost(post.id)"
+                                    class="bg-yellow-900 hover:bg-yellow-600 border-lg rounded-lg  text-white px-2 py-2 font-medium border-lg border-gray-900 text-whitehover:underline">
+                                    Delete
+                                </button>
 
                             </td>
 
@@ -87,15 +111,4 @@
 
 </template>
 
-    <script setup>
-    import { onMounted, ref } from 'vue';
 
-    import usePost from '../../composables/post';
-
-    const {  posts, getPosts } = usePost();
-    
-    const index = 1;
-
-    onMounted(() => getPosts())
-
-    </script>
