@@ -14,7 +14,7 @@
 
         <div class="flex justify-end m-2 p-2">
 
-            <RouterLink :to="{name: 'PostCreate'}" class="px-4 py-2 bg-indigo-200 hover:bg-indigo-400">New Post</RouterLink>
+            <RouterLink :to="{name: 'PostCreate'}" class="rounded-lg px-4 py-2 bg-indigo-200 hover:bg-indigo-400">New Post</RouterLink>
 
         </div>
 
@@ -88,5 +88,5 @@
         </div>
 
     </div>
-    
+
 </template>
