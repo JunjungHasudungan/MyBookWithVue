@@ -5,13 +5,8 @@
     import usePost from '../../composables/post';
 
     const {  posts, getPosts, destroyPost } = usePost();
-
-    const index = 1;
-
-    onMounted(() =>
-        getPosts(),
-    )
     
+    onMounted( getPosts )
 
 </script>
 
@@ -21,7 +16,7 @@
 
         <div class="flex justify-end m-2 p-2">
 
-            <RouterLink :to="{name: 'PostCreate'}" class="rounded-lg px-4 py-2 bg-indigo-200 hover:bg-indigo-400">New Post</RouterLink>
+            <RouterLink :to="{name: 'PostCreate'}" class="rounded-lg text-white font-bold px-4 py-2 bg-indigo-400 hover:bg-indigo-300">New Post</RouterLink>
 
         </div>
 
@@ -65,11 +60,11 @@
 
                 <tbody>
 
-                        <tr v-for="post in posts" :key="post.id" class="bg-white border-b hover:bg-gray-400 hover:text-white dark:bg-gray-600 dark:border-gray-700">
+                        <tr v-for="(post, index) in posts" :key="post.id" class="bg-white border-b hover:bg-gray-400 hover:text-white dark:bg-gray-600 dark:border-gray-700">
 
                             <td class="px-6 py-4">
 
-                                {{ index++ }}
+                                {{ index + 1}}
 
                             </td>
 
@@ -87,11 +82,11 @@
 
                             <td class="px-6 py-4 space-x-2">
 
-                                    <RouterLink 
-                                        :to="{ name: 'PostEdit', params:{id: post.id} }" 
+                                    <!-- <RouterLink 
+                                        :to="{ name: 'PostEdit ', params:{id: post.id} }" 
                                         class="bg-gray-900 px-2 py-2 hover:bg-gray-600  text-white font-bold rounded-lg font-medium border border-lg border-blue-900 text-whitehover:underline"
                                         > Edit
-                                    </RouterLink>
+                                    </RouterLink> -->
 
                                 <button @click.prevent="destroyPost(post.id)"
                                     class="bg-yellow-900 hover:bg-yellow-600 border-lg rounded-lg  text-white px-2 py-2 font-medium border-lg border-gray-900 text-whitehover:underline">

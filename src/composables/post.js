@@ -17,7 +17,6 @@ export default function usePost() {
             const response = await axios.get("posts/");
     
             posts.value = response.data.data;
-
            
         }catch( error ){
             if(error.response.data === 422){
@@ -65,7 +64,8 @@ export default function usePost() {
         if(!window.confirm('Yakin menghapus data post?')){
             return;
         }
-        axios.delete("posts/" + id);
+        await axios.delete("posts/" + id);
+
         await getPosts();
     }
 
