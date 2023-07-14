@@ -29,7 +29,7 @@ export default function usePost() {
     };
 
     const getPost = async (id) => {
-        const post = await axios.get("posts/" + id);
+        const response = await axios.get("posts/" + id);
         post.value = response.data.data;
     }
 
@@ -49,7 +49,9 @@ export default function usePost() {
 
     const updatePost = async (id) => {
         try{
-            await axios.put("posts" + id, post.value); 
+            await axios.put("posts/" + id, post.value); 
+            // console.log(dataUpdatePost);
+
             await router.push({name: "PostIndex"});
         }catch(error){
             if(error.response.data === 422){
@@ -75,6 +77,7 @@ export default function usePost() {
         getPosts,
         getPost,
         storePost,
+        updatePost,
         destroyPost,
     }
 

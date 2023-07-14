@@ -1,7 +1,24 @@
+<script setup>
+    import { onMounted } from 'vue';
+    import usePost from '../../composables/post';
+    
+    const { post, getPost, updatePost, errors } = usePost();
+
+    // menngguankan defineProps Untuk mengambil props dari pust.js
+    const props = defineProps({
+        id: {
+            required: true,
+            type: String
+        }
+    });
+
+    onMounted( () => getPost(props.id) )
+</script>
+
 <template>
     <div class="border border-gray-200 bg-gray-900 mt-4 px-2 rounded-lg">
         
-    <form   @submit.prevent="storePost(form)"
+    <form   @submit.prevent="updatePost($route.params.id)"
             class="mx-auto p-4  mx-w-md">
         <div class="mt-2 grid gap-6 mb-6 md:grid-cols-2">
             <div>
@@ -13,7 +30,7 @@
                 <input 
                     type="text" 
                     id="title" 
-                    v-model="form.title"
+                    v-model="post.title"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
                     placeholder="Masukkan Judul disini.."
                     required
@@ -33,7 +50,7 @@
                 <input 
                     type="text" 
                     id="description" 
-                    v-model="form.description"
+                    v-model="post.description"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
                     placeholder="Masukkan Keterangan disini.."
                     required >
@@ -61,6 +78,3 @@
     </div>
 </template>
 
-<script setup>
-
-</script>

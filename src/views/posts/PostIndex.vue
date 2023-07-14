@@ -33,7 +33,7 @@
             </div>
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
 
-                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+                <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-800 dark:text-gray-400">
 
                     <tr>
 
@@ -65,7 +65,7 @@
 
                 <tbody>
 
-                        <tr v-for="post in posts" :key="post.id" class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
+                        <tr v-for="post in posts" :key="post.id" class="bg-white border-b hover:bg-gray-400 hover:text-white dark:bg-gray-600 dark:border-gray-700">
 
                             <td class="px-6 py-4">
 
@@ -85,13 +85,13 @@
 
                             </td>
 
-                            <td class="px-6 py-4">
+                            <td class="px-6 py-4 space-x-2">
 
-                                    <!-- <RouterLink 
+                                    <RouterLink 
                                         :to="{ name: 'PostEdit', params:{id: post.id} }" 
-                                        class="rounded-lg font-medium border-lg border-gray-900 text-whitehover:underline"
+                                        class="bg-gray-900 px-2 py-2 hover:bg-gray-600  text-white font-bold rounded-lg font-medium border border-lg border-blue-900 text-whitehover:underline"
                                         > Edit
-                                    </RouterLink> -->
+                                    </RouterLink>
 
                                 <button @click.prevent="destroyPost(post.id)"
                                     class="bg-yellow-900 hover:bg-yellow-600 border-lg rounded-lg  text-white px-2 py-2 font-medium border-lg border-gray-900 text-whitehover:underline">
