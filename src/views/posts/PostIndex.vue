@@ -4,9 +4,9 @@
 
     import usePost from '../../composables/post';
 
-    const {  posts, getPosts, destroyPost } = usePost();
+    const { posts, getPosts, destroyPost } = usePost();
     
-    onMounted( getPosts )
+    onMounted( () => getPosts() );
 
 </script>
 
@@ -21,11 +21,12 @@
         </div>
 
         <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-            <div v-if="posts === 0" class="px-2 py-2 w-full bg-yellow-500 text-white font-extrabold">
-                <span>
+            <div v-if="posts.length == 0" class="px-2 py-2 w-full bg-yellow-500">
+                <span class="text-white font-extrabold">
                     Tidak ada data..
                 </span>
             </div>
+
             <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
 
                 <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-800 dark:text-gray-400">
@@ -82,11 +83,11 @@
 
                             <td class="px-6 py-4 space-x-2">
 
-                                    <!-- <RouterLink 
-                                        :to="{ name: 'PostEdit ', params:{id: post.id} }" 
-                                        class="bg-gray-900 px-2 py-2 hover:bg-gray-600  text-white font-bold rounded-lg font-medium border border-lg border-blue-900 text-whitehover:underline"
+                                    <RouterLink 
+                                        :to="{name: 'PostEdit', params:{ id: post.id } }" 
+                                        class="bg-gray-700 px-2 py-2 hover:bg-gray-600  text-white font-bold rounded-lg font-medium border border-lg border-blue-900 text-whitehover:underline"
                                         > Edit
-                                    </RouterLink> -->
+                                    </RouterLink>
 
                                 <button @click.prevent="destroyPost(post.id)"
                                     class="bg-yellow-900 hover:bg-yellow-600 border-lg rounded-lg  text-white px-2 py-2 font-medium border-lg border-gray-900 text-whitehover:underline">

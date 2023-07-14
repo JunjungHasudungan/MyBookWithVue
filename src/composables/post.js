@@ -14,7 +14,7 @@ export default function usePost() {
 
     const getPosts = async () => {
         try{
-            const response = await axios.get("posts/");
+            let response = await axios.get("posts");
     
             posts.value = response.data.data;
            
@@ -40,8 +40,8 @@ export default function usePost() {
            await router.push({name: "PostIndex"});
 
         }catch(error){
-            if(error.response.data === 422){
-                errors.value = response.data.errors;
+            if(error.response.status === 422){
+                errors.value = error.response.data.errors;
             }
         }
     }
@@ -53,7 +53,7 @@ export default function usePost() {
 
             await router.push({name: "PostIndex"});
         }catch(error){
-            if(error.response.data === 422){
+            if(error.response.status === 422){
                 error.value = error.response.data.errors;
             }
         }
@@ -72,7 +72,6 @@ export default function usePost() {
     return {
         posts,
         post,
-        errors, 
         errors,
         getPosts,
         getPost,
